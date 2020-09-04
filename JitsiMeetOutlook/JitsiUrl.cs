@@ -21,6 +21,10 @@ namespace JitsiMeetOutlook
             {
                 return generateRandomPhrase();
             }
+            else if (Properties.Settings.Default.randomRoomIdGeneratorMode == "pin")
+            {
+                return generateRandomPIN();
+            }
             else
             {
                 return generateRandomString(16);
@@ -29,6 +33,15 @@ namespace JitsiMeetOutlook
         public static string generateRandomPhrase()
         {
             return randomListElement(getAdjectiveList()) + randomListElement(getPluralNounList()) + randomListElement(getVerbList()) + randomListElement(getAdverbList());
+        }
+        
+        public static string generateRandomPIN()
+        {
+            // Create a 9-Digit-PIN, which can be used in Phone Systems
+            int _min = 100000000;
+            int _max = 999999999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
         }
 
         public static string getUrlBase()

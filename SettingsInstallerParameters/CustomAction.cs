@@ -103,7 +103,7 @@ namespace SettingsInstallerParameters
 
         private static string getLanguage(Session session)
         {
-            string[] availableLanguages = { "en", "fr", "ru" };
+            string[] availableLanguages = { "en", "fr", "ru", "de" };
             string userLanguageInput = session.CustomActionData["language"];
 
             if (availableLanguages.Contains(userLanguageInput))
@@ -119,7 +119,7 @@ namespace SettingsInstallerParameters
 
         private static string getRandomRoomIdGeneratorMode(Session session)
         {
-            string[] availableModes = { "phrase", "string" };
+            string[] availableModes = { "phrase", "string", "pin" };
             string userModeInput = session.CustomActionData["randomRoomIdGeneratorMode"];
 
             if (availableModes.Contains(userModeInput))

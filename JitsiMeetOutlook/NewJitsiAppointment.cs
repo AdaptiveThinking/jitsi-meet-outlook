@@ -24,11 +24,18 @@ namespace JitsiMeetOutlook
                 // Create meeting object
                 newAppointment = (Outlook.AppointmentItem) application.CreateItem(Outlook.OlItemType.olAppointmentItem);
 
-
                 // Appointment details
-                newAppointment.Location = "Jitsi Meet";
-                newAppointment.Body = Globals.ThisAddIn.getElementTranslation("appointmentItem", "textBodyMessage") + (JitsiUrl.getUrlBase() + jitsiRoomId);
-
+                if (Properties.Settings.Default.randomRoomIdGeneratorMode == "pin")
+                {
+                    newAppointment.Location = "Jitsi Meet or Dial in " + Properties.Settings.Default.PhoneNumber + " PIN: " + jitsiRoomId;
+                    newAppointment.Body = Globals.ThisAddIn.getElementTranslation("appointmentItem", "textBodyMessage") + (JitsiUrl.getUrlBase() + jitsiRoomId);
+                }
+                else 
+                {
+                    newAppointment.Location = "Jitsi Meet";
+                    newAppointment.Body = Globals.ThisAddIn.getElementTranslation("appointmentItem", "textBodyMessage") + (JitsiUrl.getUrlBase() + jitsiRoomId);
+                }
+                
                 // Display ribbon group, then the appointment window
                 Globals.ThisAddIn.ShowRibbonAppointment = true;
                 newAppointment.Display(false);
